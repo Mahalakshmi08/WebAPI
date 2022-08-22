@@ -9,36 +9,43 @@ namespace DemoWebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        static List<string> Fruits = new List<string> { "Apple", "Mango", "Pear", "Orange", "Chickoo" };
+
+
+
         // GET: api/<ValuesController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return Fruits;
         }
 
         // GET api/<ValuesController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return Fruits[id];
         }
 
         // POST api/<ValuesController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
+            Fruits.Add(value);
         }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            Fruits[id] = value;
         }
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            Fruits.RemoveAt(id);
         }
     }
 }
