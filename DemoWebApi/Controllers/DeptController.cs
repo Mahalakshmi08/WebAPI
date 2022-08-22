@@ -79,8 +79,12 @@ namespace DemoWebApi.Controllers
             {
                 try
                 {
-                    db.Depts.Add(dept);
-                    db.SaveChanges();
+                    //db.Depts.Add(dept);
+                    //db.SaveChanges();
+
+                    //call store procedure to add records
+
+                    db.Database.ExecuteSqlInterpolated($"deptadd {dept.Id},{dept.Name},{dept.Location}");
                 }
 
                 catch(Exception ex)
