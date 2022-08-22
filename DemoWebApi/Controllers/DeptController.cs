@@ -4,6 +4,7 @@ using DemoWebApi.Models;
 using System.Linq;
 using DemoWebApi.ViewModel;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace DemoWebApi.Controllers
 {
@@ -67,6 +68,27 @@ namespace DemoWebApi.Controllers
         {
             var data = db.DeptInfo_VMs.FromSqlInterpolated<DeptInfo_VM>($"DeptInfo");
             return Ok(data);
+        }
+
+        [HttpPost]
+        [Route("AddDept")]
+
+        public IActionResult PostDept(Dept dept)
+        {
+            if(ModelState.IsValid)
+            {
+                try
+                {
+                    db.Depts.Add(dept);
+                    db.SaveChanges();
+                }
+
+                catch(Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
+            }
+            return Created("Record Successfully Added", dept);
         }
     }
 }
