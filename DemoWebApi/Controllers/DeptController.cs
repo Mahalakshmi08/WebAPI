@@ -94,5 +94,23 @@ namespace DemoWebApi.Controllers
             }
             return Created("Record Successfully Added", dept);
         }
+
+        [HttpPut]
+        [Route("EditDept/{id}")]
+        public IActionResult PutDept(int id,Dept dept)
+        {
+            if(ModelState.IsValid)
+            {
+                Dept odept = db.Depts.Find(id);
+                odept.Name = dept.Name;
+                odept.Location = dept.Location;
+                db.SaveChanges();
+                return Ok(odept);
+            }
+
+            return BadRequest("Unable to edit Record");
+        }
+
+       
     }
 }
