@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using DemoWebApi.ViewModel;
 
 #nullable disable
 
@@ -19,6 +20,7 @@ namespace DemoWebApi.Models
 
         public virtual DbSet<Dept> Depts { get; set; }
         public virtual DbSet<Emp> Emps { get; set; }
+        public virtual DbSet<DeptInfo_VM> DeptInfo_VMs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

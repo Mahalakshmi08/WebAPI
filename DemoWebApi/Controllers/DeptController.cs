@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using DemoWebApi.Models;
 using System.Linq;
+using DemoWebApi.ViewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoWebApi.Controllers
 {
@@ -55,6 +57,15 @@ namespace DemoWebApi.Controllers
             {
                 return NotFound($"No Locations found in {city}");
             }           
+            return Ok(data);
+        }
+
+        [HttpGet]
+        [Route("ShowDept")]
+
+        public IActionResult GetDeptInfo()
+        {
+            var data = db.DeptInfo_VMs.FromSqlInterpolated<DeptInfo_VM>($"DeptInfo");
             return Ok(data);
         }
     }
