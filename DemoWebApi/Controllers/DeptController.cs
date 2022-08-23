@@ -111,6 +111,14 @@ namespace DemoWebApi.Controllers
             return BadRequest("Unable to edit Record");
         }
 
-       
+        [HttpDelete]
+        [Route("DeleteDept/{id}")]
+        public IActionResult DeleteDept(int id)
+        {
+            var data = db.Depts.Find(id);
+            db.Depts.Remove(data);
+            db.SaveChanges();
+            return Ok();
+        }
     }
 }
